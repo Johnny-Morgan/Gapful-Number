@@ -9,11 +9,18 @@ import java.util.Scanner;
  */
 public class Gapful {
 
-    // method for a 3 digit number
+    // method to return the first digit of an integer
+    public static int firstDigit(int num){
+        while(num > 9){
+            num /= 10;
+        }
+        return num;
+    }
+    // method to return if a number is a gapful number
     public static boolean isAGapful(int num){
         boolean isAGapful = false;
         int lastDigit = num % 10;
-        int firstDigit = num / 100;
+        int firstDigit = firstDigit(num);
         int divisor = firstDigit * 10 + lastDigit;
         if(num % divisor == 0){
             isAGapful = true;
@@ -22,12 +29,18 @@ public class Gapful {
     }
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
-        System.out.print("Enter a 3 digit number: ");
-        int number = keyboard.nextInt();
-        if(isAGapful(number))
-            System.out.print(number + " is a gapful number");
-        else
-            System.out.print(number + " is not a gapful number");
+        System.out.println("Enter a range of positive numbers (first number should be at least 3 digits)\n");
+        System.out.print("Enter first number in range: ");
+        int firstNumber = keyboard.nextInt();
+        System.out.print("Enter last number in range: ");
+        int lastNumber = keyboard.nextInt();
+
+        // Check and output which numbers in the range are gapful numbers
+        System.out.printf("%nThe gapful numbers in the range %d - %d are: %n%n", firstNumber, lastNumber);
+        for(int i = firstNumber; i <= lastNumber; i++){
+            if(isAGapful(i))
+                System.out.println(i);
+        }
     }
 }
 
